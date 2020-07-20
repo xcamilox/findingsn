@@ -1,0 +1,9 @@
+.chart-container{
+    position: relative;
+}
+
+.chart-container #form-chart{
+
+    z-index: 999;
+    background-color:rgba(211, 206, 206, 0.7);
+}

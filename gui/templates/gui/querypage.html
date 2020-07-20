@@ -1,0 +1,154 @@
+{% extends 'gui/base.html' %}
+{% load static %}
+{% block title %}IAC SN hunter, last results{% endblock %}
+{% block nav %}
+    {% include "gui/navigation.html" %}
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Single</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Aggregation</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <form id="getquery">
+                  <div class="form-group">
+                    <label for="collection">Collection</label>
+                    <input type="text" class="form-control" id="collection" placeholder="collection" name="collection" value="lastdetections">
+                  </div>
+                   <div class="form-group">
+                    <label for="filter">filter</label>
+                    <textarea class="form-control" id="filter" rows="3" name="filter">{"id":"ZTF17aaachlp"}</textarea>
+                  </div>
+                    <div class="form-group">
+                    <label for="projection">projection</label>
+                    <textarea class="form-control" id="projection" rows="3" name="projection">{"id":1}</textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary" >Submit</button>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                <form id="getaggregation">
+                      <div class="form-group">
+                        <label for="collection">Collection</label>
+                        <input type="text" class="form-control" id="collection" placeholder="collection" name="collection" value="lastdetections">
+                      </div>
+                        <div class="form-group">
+                        <label for="projection">pipeline</label>
+                        <textarea class="form-control" id="pipeline" rows="6" name="pipeline">{"id":1}</textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary" >Submit</button>
+                </form>
+
+          </div>
+
+        </div>
+    </div>
+    <div class="container-fluid" id="results">
+        <table id="results-table" class="display" width="100%"></table>
+    </div>
+
+{% endblock %}
+
+
+{% block javascript %}
+
+    <script src="{% static 'js/gui/datatables.js' %}"></script>
+    <script src="{% static 'js/gui/demo_query.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+
+            $("form#getaggregation").submit(function(event){
+
+                event.preventDefault()
+                var request = $.ajax({
+                    method:"POST",
+                    url:"{% url 'runaggregationData' %}",
+                    data:$('form#getaggregation').serialize(),
+                    dataType:"json",
+                })
+                request.done(function(data){
+                    console.log("done",data)
+                    if(data.hasOwnProperty("error")){
+                        $("#error-msg").alert()
+                    }
+                    let columns=[]
+                    for(let col in data[0]){
+                        columns.push({title:col})
+                    }
+                    let dataset=[]
+                    for(let row in data){
+                        let row_data=[]
+                        for(let col in data[0]){
+                            row_data.push(data[row][col])
+                        }
+                        dataset.push(row_data)
+                    }
+
+                    console.log("columns",columns)
+                    createTable(dataset,columns,"#results-table")
+
+                })
+                request.fail(function(functionjqXHR, textStatus ) {
+                    $("#error-msg").alert()
+                    //console.log( "Request failed: " + textStatus );
+                })
+
+
+            })
+
+
+
+            $("form#getquery").submit(function(event){
+
+
+                event.preventDefault()
+
+                var request = $.ajax({
+                    method:"POST",
+                    url:"{% url 'runQueryData' %}",
+                    data:$('form#getquery').serialize(),
+                    dataType:"json",
+                })
+                request.done(function(data){
+                    console.log("done",data)
+                    if(data.hasOwnProperty("error")){
+                        $("#error-msg").alert()
+                    }
+                    let columns=[]
+                    for(let col in data[0]){
+                        columns.push({title:col})
+                    }
+                    let dataset=[]
+                    for(let row in data){
+                        let row_data=[]
+                        for(let col in data[0]){
+                            row_data.push(data[row][col])
+                        }
+                        dataset.push(row_data)
+                    }
+
+                    console.log("columns",columns)
+                    createTable(dataset,columns,"#results-table")
+
+                })
+                request.fail(function(functionjqXHR, textStatus ) {
+                    $("#error-msg").alert()
+                    //console.log( "Request failed: " + textStatus );
+                })
+            })
+        } );
+    </script>
+
+{% endblock %}

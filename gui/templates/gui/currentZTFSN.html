@@ -1,0 +1,82 @@
+{% extends 'gui/base.html' %}
+{% block title %}IAC SN hunter, last results{% endblock %}
+{% block nav %}
+    {% include "gui/navigation.html" %}
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+
+<table id="result_table" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>IternalName</th>
+                <th>RA</th>
+                <th>DEC</th>
+                <th>ObjType</th>
+                <th>Redshift</th>
+                <th>HostName</th>
+                <th>HostRedshift</th>
+                <th>Sender</th>
+                <th>ClassifyingGroup</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>IternalName</th>
+                <th>RA</th>
+                <th>DEC</th>
+                <th>ObjType</th>
+                <th>Redshift</th>
+                <th>HostName</th>
+                <th>HostRedshift</th>
+                <th>Sender</th>
+                <th>ClassifyingGroup</th>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#result_table').DataTable( {
+                "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+                scrollY:        '70vh',
+                scrollCollapse: true,
+                //paging:         false,
+                ajax: {
+                    url: "{% url 'currentTNSSNData' %}"
+                },
+                columns: [
+                    {'data':'Name',"render": function ( data, type, row, meta ) {
+                        return '<a href="https://wis-tns.weizmann.ac.il/object/'+data+'">'+data+'</a>';
+                    }},
+                    {'data':'DiscInternalName',"render": function ( data, type, row, meta ) {
+                        return '<a href="https://lasair.roe.ac.uk/object/'+data+'">'+data+'</a>';
+                    }},
+                    {'data':'RA'},
+                    {'data':'DEC'},
+                    {'data':'ObjType'},
+                    {'data':'Redshift'},
+                    {'data':'HostName'},
+                    {'data':'HostRedshift'},
+                    {'data':'Sender'},
+                    {'data':'ClassifyingGroup'},
+                    ]
+            } );
+        } );
+    </script>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'gui/base.html' %}
+{% load static %}
+{% block title %}IAC SN hunter, last results{% endblock %}
+{% block nav %}
+    {% include "gui/navigation.html" %}
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.css" />
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid" id="detail-content">
+    <h1>{{ source.id}}</h1>
+    <div class="row justify-content-md-center">
+        <div class="col">
+            <div id="lightcurve"></div>
+        </div>
+        <div class="col">
+            <div id="positions"></div>
+        </div>
+        <div class="col">
+            <div id="aladin-lite-div" style="width:398px;height:398px;"></div>
+        </div>
+    </div>
+
+    </div>
+    <div class="container-fluid">
+    <div class="row">
+           <img src="http://legacysurvey.org/viewer/jpeg-cutout/?ra=190.1086&dec=1.2005&layer=dr8&pixscale=0.27&bands=grz" width="300" height="300" class="border">
+    </div>
+    </div>
+{% endblock %}
+
+
+{% block javascript %}
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="{% static 'js/gui/underscore-min.js' %}"></script>
+    <script type="text/javascript" src="https://aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js" charset="utf-8"></script>
+     <script type="text/javascript">
+
+            {% autoescape off %}
+            var datasource = {{ source }};
+
+            {% endautoescape %}
+
+
+            var aladin = A.aladin('#aladin-lite-div', {survey: "P/PanSTARRS/DR1/color/z/zg/g", fov:0.01, target: datasource.ra+", "+datasource.dec});
+
+    </script>
+    <script src="{% static 'js/gui/plots.js' %}"></script>
+{% endblock %}

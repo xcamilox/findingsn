@@ -1,0 +1,55 @@
+{% extends 'gui/base.html' %}
+{% load static %}
+{% block title %}IAC SN hunter, last results{% endblock %}
+{% block nav %}
+    {% include "gui/navigation.html" %}
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/gui/jsonview.css'%}" />
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <!-- include Aladin Lite CSS file in the head section of your page -->
+    <link rel="stylesheet" href="https://aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.css" />
+
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <form class="mx-auto p-5" id="crossmatch-form">
+          <div class="form-row">
+            <div class="col">
+              <label for="ra">Ra(deg)</label>
+              <input type="ra" class="form-control mb-2" id="ra"  name="ra" placeholder="ra(deg)" value="143.2328656">
+            </div>
+            <div class="col">
+              <label for="dec">dec(deg)</label>
+              <input type="dec" class="form-control mb-2" id="dec" name="dec" placeholder="dec(deg)" value="36.8441622">
+            </div>
+              <div class="col">
+              <label for="radio">Distance(arcsec)</label>
+              <input type="number" id="radio" name="radio" min="1" max="365" value="5">
+
+            </div>
+            <div class="col">
+              <button type="submit" class="btn btn-primary mb-2">Search</button>
+            </div>
+          </div>
+    </form>
+    </div>
+    <div id="loading" class="d-flex justify-content-center invisible">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <div id="accordion" class="container">
+    </div>
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+    <script src="{% static 'js/gui/jsonview.js' %}"></script>
+    <script src="{% static 'js/gui/crossmatch.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        {% load static %}
+        {# bootstrap library #}
+          {% load bootstrap4 %}
+
+          {# CSS Bootstrap #}
+          {% bootstrap_css %}
+        {% block css %}
+        {% endblock %}
+        <!-- Main gui Style -->
+          <link rel="stylesheet" type="text/css" href="{% static 'css/gui/style.css' %}">
+    </head>
+    <body class="bg-light">
+        {% block nav %}
+        {% endblock %}
+
+        {% block content %}
+        {% endblock %}
+
+        {# JS y jQuery Bootstrap #}
+
+        {% bootstrap_javascript jquery='full' %}
+
+        {% block javascript %}
+        {% endblock %}
+    </body>
+</html>

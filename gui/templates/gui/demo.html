@@ -1,0 +1,127 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>tabs demo</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{% static 'js/gui/jscolor.js' %}"></script>
+</head>
+<body>
+
+<div id="tabs">
+    <ul>
+        <li><span>add</span></li>
+        <li><a href="#fragment-1"><span>One</span></a></li>
+        <li><a href="#fragment-2"><span>Two</span></a></li>
+        <li><a href="#fragment-3"><span>Three</span></a></li>
+    </ul>
+    <div id="fragment-1">
+        <p>First tab is active by default:</p>
+        <pre><code>$( "#tabs" ).tabs(); </code></pre>
+    </div>
+    <div id="fragment-2">
+        <form>
+            <div class="row">
+                <div class="col">
+                    <div class="form-row align-items-center">
+                        <div class="form-group">
+                            <label>X Axis</label>
+                            <select class="form-control xaxis">
+                            </select>
+                        </div>
+
+                        <div class="form-check form-check-inline mt-3 ml-3">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">Flip</label>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row align-items-center">
+                        <div class="form-group">
+                            <label>Y Axis</label>
+                            <select class="form-control yaxis">
+                            </select>
+                        </div>
+                        <div class="form-check form-check-inline mt-3 ml-3">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">Flip</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <input class="jscolor">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="fragment-3">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+        dolore magna aliquam erat volutpat.
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+        dolore magna aliquam erat volutpat.
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+        dolore magna aliquam erat volutpat.
+    </div>
+</div>
+
+<script>
+    $("#tabs").tabs();
+</script>
+
+<div class="container-fluid">
+    <div class="row plot-container">
+        <div id="plot-0-container"></div>
+    </div>
+    <div class="row tools-container">
+        <div class="tools-tab">
+            <ul>
+                <li><a href="#add-trace">+</a></li>
+            </ul>
+            <div id="add-trace">
+                <form>
+                    <div class="row">↵
+                        <div class="col">↵
+                            <div class="form-row align-items-center">↵
+                                <div class="form-group">↵ <label>X Axis</label>↵ <select
+                                        class="form-control xaxis">↵ </select>↵
+                                </div>
+                                <div class="form-check form-check-inline mt-3 ml-3">↵ <input class="form-check-input"
+                                                                                             type="checkbox">↵ <label
+                                        class="form-check-label">Flip</label>↵
+                                </div>
+                            </div>
+
+                            <div class="form-row align-items-center">↵
+                                <div class="form-group">↵ <label>Y Axis</label>↵ <select
+                                        class="form-control yaxis">↵ </select>↵
+                                </div>
+
+                                <div class="form-check form-check-inline mt-3 ml-3">↵ <input class="form-check-input"
+                                                                                             type="checkbox">↵ <label
+                                        class="form-check-label">Flip</label>↵
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col">↵ <input class="jscolor">↵</div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

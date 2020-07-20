@@ -1,0 +1,54 @@
+{% load menu %}
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="#">SN Hunter</a>
+          <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item {% active 'any' %}">
+                <a class="nav-link" href="#">SN detections<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item {% active 'crosmatchui' %}">
+                <a class="nav-link" href="{% url 'crosmatchui' %}">crossmatch</a>
+              </li>
+              <span class="navbar-text">
+              Hi! {{ user.get_username }}
+              </span>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="{% url "logout" %}">LogOut</a>
+                </div>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+
+        </div>
+    </nav>
+
+    <div class="nav-scroller bg-white box-shadow">
+        <div class="container">
+      <nav class="nav nav-underline">
+        <a class="nav-link {% active 'allobjectsui' %}" href="{% url 'allobjectsui' %}">All data</a>
+
+
+          <a class="nav-link {% active 'allcandidatesui' %}" href="{% url 'allcandidatesui' %}">All Candidates</a>
+        <a class="nav-link {% active 'lastcandidatesui' %}" href="{% url 'lastcandidatesui' %}">New Candidates</a>
+          <a class="nav-link {% active 'lastdetectionsui' %}" href="{% url 'lastdetectionsui' %}">Last Detections</a>
+          <a class="nav-link {% active 'bestcandidatesui' %}" href="{% url 'bestcandidatesui' %}">Best Candidates</a>
+          <a class="nav-link {% active 'massivegalaxiesui' %}" href="{% url 'massivegalaxiesui' %}">Masive galaxies Candidates</a>
+        <a class="nav-link {% active 'currentsnui' %}" href="{% url 'currentsnui' %}">current ZTF SN</a>
+        <a class="nav-link {% active 'queryui' %}" href="{% url 'queryui' %}">Query</a>
+        <a class="nav-link {% active 'sqlqueryui' %}" href="{% url 'sqlqueryui' %}">SQL Query</a>
+      </nav>
+            </div>
+    </div>

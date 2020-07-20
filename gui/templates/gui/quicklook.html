@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-8 p-4">
+        <div class="row">
+            {% include "gui/chatmanager.html" %}
+
+        </div>
+        <div class="row m-4">
+            <div class="tab-content col-4" id="quicklook-tabContent">
+                <nav>
+                    <div class="nav nav-tabs" id="quicklook-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-redshift-tab" data-toggle="tab" href="#nav-redshift"
+                           role="tab" aria-controls="nav-redshift" aria-selected="true">Redshift</a>
+                        <a class="nav-item nav-link" id="nav-crossmatch-tab" data-toggle="tab" href="#nav-crossmatch"
+                           role="tab" aria-controls="nav-crossmatch" aria-selected="false">CrossMatch</a>
+                        <a class="nav-item nav-link" id="nav-comments-tab" data-toggle="tab" href="#nav-comments"
+                           role="tab"
+                           aria-controls="nav-comments" aria-selected="false">Comments</a>
+                    </div>
+                </nav>
+                <div class="tab-pane fade show active" id="nav-redshift" role="tabpanel"
+                     aria-labelledby="nav-redshift-tab">...
+                </div>
+                <div class="tab-pane fade" id="nav-crossmatch" role="tabpanel" aria-labelledby="nav-crossmatch-tab">
+                    ...
+                </div>
+                <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
+                    <ul>
+                        <li><span class="border">user</span>comment</li>
+                        <li><span class="border">user</span>comment</li>
+                        <li><span class="border">user</span>comment</li>
+                        <li><span class="border">user</span>comment</li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-4 p-4">
+        <div class="row">
+
+            {% include "gui/aladin.html" %}
+            <h2 id="currentItemTitle">TItle</h2>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a class="btn btn-secondary" id="tns_url" href="">TNS</a>
+                <a class="btn btn-secondary" id="lasair_url" href="">Lasair</a>
+                <a class="btn btn-secondary" id="alerce_url" href="">Alerce</a>
+                <a class="btn btn-secondary" id="decals_url" href="">Decals</a>
+                <a class="btn btn-secondary" id="sdss_url" href="">SDSS</a>
+                <a class="btn btn-secondary" id="panstars_url" href="">Panstars</a>
+                <a class="btn btn-secondary" id="ned_url" href="">NED</a>
+                <a class="btn btn-secondary" id="pacs_url" href="">PACS</a>
+                <a class="btn btn-secondary" id="spire_url" href="">SPIRE</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div id="lightcurve"></div>
+            </div>
+            <div class="col-6">
+                <div id="position-plot"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

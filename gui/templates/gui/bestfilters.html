@@ -1,0 +1,15 @@
+<div class="row p-2">
+    <form class="form-inline mx-auto" method="get" action="#">
+      <div class="form-group mb-2">
+        <label for="exampleFormControlSelect1">Criterial</label>
+        <select class="form-control" id="filter" name="filter">
+          <option value="peak">Peak</option>
+          <option value="lastdetection">last detection</option>
+
+        </select>
+        <label for="days" class="int-only pr-3">Get last days Ago</label>
+        <input type="number" id="days" name="days" min="1" max="365" value="{{days}}">
+      </div>
+      <button type="submit" class="btn btn-primary mb-2 ml-3">filter</button>
+    </form>
+</div>
